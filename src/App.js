@@ -11,36 +11,34 @@ import FormDialog from './Components/FormDialog';
 import form from './Components/form.json';
 
 
-const App = () => {
-  const [rowData, setRowData] = useState(userData);
+const App = (props) => {
+  // const [rowData, setRowData] = useState(userData);
   const [gridApi, setGridApi] = useState(null)
-  const [tableData, setTableData] = useState(userData)
+  // const [tableData, setTableData] = useState(userData)
   const [open, setOpen] = React.useState(true);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+const [tableData, setTableData] = useState([
+  {id:"1",name:"vamsi",name2:"Bata",number:"45667565685"},
+  {id:"2",name:"varma",name2:"Puma",number:"78857875"},
+  {id:"3",name:"sai",name2:"puma",number:"655753373"},
+  {id:"4",name:"raju",name2:"Bata",number:"26537573757"},
+  {id:"5",name:"suresh",name2:"puma",number:"545735354"},
+  {id:"6",name:"varma",name2:"Bata",number:"876543"},
+  {id:"7",name:"bh",name2:"puma",number:"123456"},
+  {id:"8",name:"n",name2:"Bata",number:"265375757"},
+  {id:"9",name:"vamsi",name2:"puma",number:"2653757357"}
+])
   
   const columnDefs = [
-    { headerName: "#" },
-    { headerName: "Actions" },
-    { headerName: "Images" },
     { headerName: "ID", field: "id" },
     { headerName: "Name", field: "name", },
-    { headerName: "Brand", field: "name", },
-    { headerName: "measurements", field: "number" },
-    { headerName: "Is active", field: "dob" },
-    { headerName: "Categories", field: "name" },
-    { headerName: "Price", field: "number" },
-
+    { headerName: "Brand", field: "name2", },
+    { headerName: "ID Number", field: "number" }
   ]
 
-const userData = [
-  {num: "Toyota", name: "Celica", name2: 35000},
-  {num: "Ford", name: "Mondeo", name2: 32000},
-  {num: "Porsche", name: "Boxter", name2: 72000}
-];
   const onGridReady = (params) => {
     setGridApi(params)
   }
@@ -61,14 +59,18 @@ const userData = [
   console.log(data);
   },[data]);
 
+  const refreshpage=()=>{
+window.location.reload();
+  }
+
   return (
     <div className="App">
       <h1 >React-App</h1>
       <div style={{ textAlign: 'right' }} >
 
         <button className='product_btns'><GetApp /></button>
-        <button className='product_btns' onClick={handleClickOpen}><AddIcon /></button>
-        <button className='product_btns'><RefreshIcon /></button>
+        <button className='product_btns'  onClick={props.handleClose}><AddIcon /></button>
+        <button className='product_btns' onClick={refreshpage}><RefreshIcon /></button>
         <button className='product_btns' ><PublishIcon /></button>
       </div>
       <div className="ag-theme-alpine" style={{ height: '400px' }}>
@@ -80,7 +82,7 @@ const userData = [
         />
         
       </div>
-      <FormDialog  />
+      {/* <FormDialog  /> */}
     </div >
   );
 }
