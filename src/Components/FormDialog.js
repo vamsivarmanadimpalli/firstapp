@@ -35,7 +35,7 @@ const FormDialog = ({handleClose}) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloser}>Cancel</Button>
-                    <Button autoFocus onClick={handleCloser}>
+                    <Button  onClick={handleCloser}>
                         Submit
                     </Button>
                 </DialogActions> 

@@ -10,10 +10,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import { GetApp, Home } from '@material-ui/icons';
 import './HomePage.css';
 import FormDialog from '../Components/FormDialog';
-import { Box, Modal } from '@material-ui/core';
+import { Modal } from '@material-ui/core';
+import Demo from './Demo';
+import Edit from '../Components/Edit';
 
 const HomePage = (props) => {
   const [open, setOpen] = React.useState(false);
+  const [noOfRows, setNoOfRows] = useState(1);
 
   const columnDefs = [
     { headerName: "ID", field: "id" },
@@ -55,6 +58,30 @@ function deleteRow(force = false) {
   }
 };
 
+// onClick={() => deleteRow()} 
+
+// deleteSearchItem: function(e) {
+//   var searchItemIndex = parseInt(e.target.value, 10);
+//   console.log('remove task: %d', searchItemIndex);
+//   this.setState(state => {
+//       state.data.splice(searchItemIndex, 1);
+//       return { data: state.data };
+//   });
+// }
+
+
+
+// function deleteRow(force = false) {
+//   let data = props.data;
+//   let confirm = true;
+//   if (!force) {
+//       confirm = window.confirm(`are you sure you want to delete this row: ${JSON.stringify(data)})`)
+//   }
+//   if (confirm) {
+//       props.api.updateRowData({ remove: [data] });
+//       props.api.refreshCells({ force: true });
+//   }
+// };
 
 
     const onGridReady = (params)=>{
@@ -64,15 +91,16 @@ fetch("https://jsonplaceholder.typicode.com/comments").then(resp=>resp.json())
   params.api.applyTransaction({add:resp})})
   }
   function IconComponent(props) {
-    return (<><EditIcon />  <DeleteOutlineSharpIcon width={13} onClick={() => deleteRow()} /></>);
+    return (<><EditIcon onClick={() => setEditModalState(true)}/>  
+    <DeleteOutlineSharpIcon width={13}  onClick={() => deleteRow()}  /></>);
   }
 
   const [isFormDialogModalOpen, setFormDialogModalState] = useState(false);
   const handleFormDialogModal = (value) => setFormDialogModalState(value);
 
-// const formDialogCallback = () => {
-//   handleFormDialogModal(false);
-// }
+  const [isEditModalOpen, setEditModalState] = useState(false);
+  const handleEditModal = (value) => setEditModalState(value);
+
   return (
     <div className="App">
       <h1 >React-App</h1>
@@ -99,7 +127,18 @@ fetch("https://jsonplaceholder.typicode.com/comments").then(resp=>resp.json())
       {/* <FormDialog onClick={formDialogCallback} /> */}
       <FormDialog />
       </Modal>
+    <div>
+      <Modal
+      open={isEditModalOpen}
+      onClose={() => handleEditModal(false)}
+      >
+        <Edit />
+      </Modal>
+    </div>
     </div >
+
+    
+    
   );
 }
 export default HomePage;
