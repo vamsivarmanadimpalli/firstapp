@@ -21,17 +21,9 @@ const HomePage = (props) => {
     { headerName: "ID", field: "id" },
     { headerName: "Country", field: "country", width: 10, cellRenderer: "iconComponent"},
     { headerName: "Name", field: "name" },
-    // { headerName: "User Name", field: "username" },
     { headerName: "Email", field: "email" },
-    { headerName: "Body", field: "body",edittable: true },
-   // { headerName: "Actions", edittable: true },
-    // { headerName: "Phone", field: "phone" },
-    // { headerName: "Company", field: "company.name" },
-    // { headerName: "Street", field: "address.street" },
-    // { headerName: "Suite", field: "address.suite" },
-    // { headerName: "City", field: "address.city" },
-    // { headerName: "Zip-Code", field: "address.zipcode" }
-  ]
+    { headerName: "Body", field: "body",edittable: true }
+  ];
   const defaultColDef = {
     sortable: true,
     flex: 1, filter: true,
@@ -55,34 +47,7 @@ function deleteRow(force = false) {
     props.api.updateRowData({remove:[data]});
     props.api.refreshCells({force:true});
   }
-};
-
-// onClick={() => deleteRow()} 
-
-// deleteSearchItem: function(e) {
-//   var searchItemIndex = parseInt(e.target.value, 10);
-//   console.log('remove task: %d', searchItemIndex);
-//   this.setState(state => {
-//       state.data.splice(searchItemIndex, 1);
-//       return { data: state.data };
-//   });
-// }
-
-
-
-// function deleteRow(force = false) {
-//   let data = props.data;
-//   let confirm = true;
-//   if (!force) {
-//       confirm = window.confirm(`are you sure you want to delete this row: ${JSON.stringify(data)})`)
-//   }
-//   if (confirm) {
-//       props.api.updateRowData({ remove: [data] });
-//       props.api.refreshCells({ force: true });
-//   }
-// };
-
-
+}
     const onGridReady = (params)=>{
 console.log("grid id ready")
 fetch("https://jsonplaceholder.typicode.com/comments").then(resp=>resp.json())
@@ -123,7 +88,7 @@ fetch("https://jsonplaceholder.typicode.com/comments").then(resp=>resp.json())
       open={isFormDialogModalOpen}
       onClose={() => handleFormDialogModal(false)}
       >
-      {/* <FormDialog onClick={formDialogCallback} /> */}
+        
       <FormDialog />
       </Modal>
     <div>
