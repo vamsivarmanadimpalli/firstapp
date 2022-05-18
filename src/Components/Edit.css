@@ -1,0 +1,24 @@
+.edit-popup-model{
+    box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+    border-radius: 30px;
+    background-color: white;
+    padding: 1rem;
+    width: 30rem;
+    z-index: 10;
+    position: fixed;
+    top: 30vh;
+    bottom: 30vh;
+    left: calc(50% - 15rem);
+  }
+  .formdialog{
+    box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+    border-radius: 50px;
+    background-color: white;
+    padding: 2rem;
+    width: 34rem;
+    z-index: 11;
+    position: fixed;
+    top: 25vh;
+    bottom: 25vh;
+    left: calc(50% - 15rem);
+  }

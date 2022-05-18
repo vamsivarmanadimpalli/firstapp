@@ -5,6 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { TextField } from '@material-ui/core';
+import './Edit.css';
 
 const FormDialog = ({handleClose}) => {
     const [open, setOpen] = React.useState(true);
@@ -13,14 +14,7 @@ const FormDialog = ({handleClose}) => {
   };
 
     return (
-        <div>
-
-            <Dialog
-                open={open}
-                onClose={handleCloser}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
+        <div className='formdialog'>
                 <DialogTitle id="alert-dialog-title">
                     Create new user
                 </DialogTitle>
@@ -39,10 +33,6 @@ const FormDialog = ({handleClose}) => {
                         Submit
                     </Button>
                 </DialogActions> 
-            </Dialog>
-
-
-
         </div>
     );
 }

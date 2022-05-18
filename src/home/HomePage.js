@@ -10,8 +10,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { GetApp, Home } from '@material-ui/icons';
 import './HomePage.css';
 import FormDialog from '../Components/FormDialog';
-import { Modal } from '@material-ui/core';
 import Edit from '../Components/Edit';
+import  Modal from '@mui/material/Modal';
 
 const HomePage = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -60,12 +60,14 @@ fetch("https://jsonplaceholder.typicode.com/comments").then(resp=>resp.json())
   }
 
   const [isFormDialogModalOpen, setFormDialogModalState] = useState(false);
-  const handleFormDialogModal = (value) => setFormDialogModalState(value);
+  const handleFormDialogModal = () => setFormDialogModalState(false);
 
-  const [isEditModalOpen, setEditModalState] = useState(false);
-  const handleEditModal = (value) => setEditModalState(value);
+const [isEditModalOpen, setEditModalState] = useState(false);
+const handleEditModal = () => {
+  setEditModalState(false);
+}
 
-  return (
+return (
     <div className="App">
       <h1 >React-App</h1>
       <div style={{ textAlign: 'right' }} >
@@ -88,13 +90,14 @@ fetch("https://jsonplaceholder.typicode.com/comments").then(resp=>resp.json())
       open={isFormDialogModalOpen}
       onClose={() => handleFormDialogModal(false)}
       >
-        
+
       <FormDialog />
       </Modal>
-    <div>
+    <div >
       <Modal
       open={isEditModalOpen}
       onClose={() => handleEditModal(false)}
+
       >
         <Edit />
       </Modal>
