@@ -11,7 +11,6 @@ import { GetApp, Home } from '@material-ui/icons';
 import './HomePage.css';
 import FormDialog from '../Components/FormDialog';
 import { Modal } from '@material-ui/core';
-import Demo from './Demo';
 import Edit from '../Components/Edit';
 
 const HomePage = (props) => {
