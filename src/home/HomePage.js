@@ -12,7 +12,6 @@ import './HomePage.css';
 import FormDialog from '../Components/FormDialog';
 import Edit from '../Components/Edit';
 import  Modal from '@mui/material/Modal';
-import Page from '../Page';
 
 const HomePage = (props) => {
   const [open, setOpen] = React.useState(false);
