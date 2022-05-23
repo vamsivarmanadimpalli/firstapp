@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -12,6 +12,7 @@ import './HomePage.css';
 import FormDialog from '../Components/FormDialog';
 import Edit from '../Components/Edit';
 import  Modal from '@mui/material/Modal';
+import Page from '../Page';
 
 const HomePage = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -24,11 +25,20 @@ const HomePage = (props) => {
     { headerName: "Email", field: "email" },
     { headerName: "Body", field: "body",edittable: true }
   ];
-  const defaultColDef = {
-    sortable: true,
+  // const defaultColDef = {
+  //   sortable: true,
+  //   flex: 1, filter: true,
+  //   floatingFilter: true
+  // }
+  const defaultColDef = useMemo(() => {
+    return {
+      editable: true,
+      sortable: true,
     flex: 1, filter: true,
     floatingFilter: true
-  }
+    };
+  }, []);
+
   let obj={};
   const [data,setData]=useState(obj);
  
@@ -48,6 +58,34 @@ function deleteRow(force = false) {
     props.api.refreshCells({force:true});
   }
 }
+
+function deleteProduct(productId) {
+  const { products } = this.state;
+
+  const apiUrl = 'https://jsonplaceholder.typicode.com/comments';
+  const formData = new FormData();
+  formData.append('productId', productId);
+
+  const options = {
+    method: 'POST',
+    body: formData
+  }
+
+  fetch(apiUrl, options)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        this.setState({
+          response: result,
+          products: products.filter(product => product.id !== productId)
+        });
+      },
+      (error) => {
+        this.setState({ error });
+      }
+    )
+}
+
     const onGridReady = (params)=>{
 console.log("grid id ready")
 fetch("https://jsonplaceholder.typicode.com/comments").then(resp=>resp.json())
@@ -56,7 +94,7 @@ fetch("https://jsonplaceholder.typicode.com/comments").then(resp=>resp.json())
   }
   function IconComponent(props) {
     return (<><EditIcon onClick={() => setEditModalState(true)}/>  
-    <DeleteOutlineSharpIcon width={13}  onClick={() => deleteRow()}  /></>);
+    <DeleteOutlineSharpIcon width={13}  onClick={() => this.deleteProduct()}  /></>);
   }
 
   const [isFormDialogModalOpen, setFormDialogModalState] = useState(false);
@@ -67,45 +105,45 @@ const handleEditModal = () => {
   setEditModalState(false);
 }
 
+const [isPageOpen, setPageState] = useState();
+const handlePage = () => {
+  setPageState(true);
+}
+
 return (
-    <div className="App">
-      <h1 >React-App</h1>
-      <div style={{ textAlign: 'right' }} >
-        <button className='product_btns'><GetApp /></button>
-        <button className='product_btns'  onClick={() => setFormDialogModalState(true)}><AddIcon /></button>
-        <button className='product_btns' onClick={refreshpage}><RefreshIcon /></button>
-        <button className='product_btns' ><PublishIcon /></button>
-      </div>
-      <div className="ag-theme-alpine" style={{ height: '400px' }}>
-      <AgGridReact 
-      frameworkComponents={{
-        iconComponent: IconComponent
-      }}
-      columnDefs={columnDefs}
-      defaultColDef={defaultColDef}
-      onGridReady={onGridReady}>
+  <div className="App">
+    <h1 >React-App</h1>
+    <div style={{ textAlign: 'right' }} >
+      <button className='product_btns' ><GetApp /></button>
+      <button className='product_btns' onClick={() => setFormDialogModalState(true)}><AddIcon /></button>
+      <button className='product_btns' onClick={refreshpage}><RefreshIcon /></button>
+      <button className='product_btns' ><PublishIcon /></button>
+    </div>
+    <div className="ag-theme-alpine" style={{ height: '400px' }}>
+      <AgGridReact
+        frameworkComponents={{
+          iconComponent: IconComponent
+        }}
+        columnDefs={columnDefs}
+        defaultColDef={defaultColDef}
+        onGridReady={onGridReady}>
       </AgGridReact>
-      </div>
-      <Modal
+    </div>
+    <Modal
       open={isFormDialogModalOpen}
       onClose={() => handleFormDialogModal(false)}
-      >
-
-      <FormDialog />
-      </Modal>
+    >
+      <FormDialog handleCloser={()=>{ handleFormDialogModal(false)}} />
+    </Modal>
     <div >
       <Modal
-      open={isEditModalOpen}
-      onClose={() => handleEditModal(false)}
-
+        open={isEditModalOpen}
+        onClose={() => handleEditModal(false)}
       >
-        <Edit />
+        <Edit handleCloser={()=>{ handleEditModal(false)}} />
       </Modal>
     </div>
-    </div >
-
-    
-    
-  );
+  </div >
+  )
 }
 export default HomePage;
