@@ -1,3 +1,12 @@
+.css-79ws1d-MuiModal-root {
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  overflow: scroll;
+  left: 0;
+}
 .edit-popup-model{
     box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
     border-radius: 10px;
@@ -6,9 +15,10 @@
     width: 470px;
     z-index: 10;
     position: fixed;
-    top: 11vh;
-    bottom: 11vh;
-    left: calc(50% - 15rem);
+        left: calc(50% - 15rem);
+    overflow-y: scroll;
+    position: relative;
+    float: left;
   }
 .button:hover {
     background: rgb(55, 51, 51);
@@ -23,6 +33,9 @@
 .buttonside{
   display: flex;
   justify-content: space-between;
+}
+.check{
+  display: flex;
 }
   .formdialog{
     box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
