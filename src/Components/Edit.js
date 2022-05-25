@@ -16,16 +16,11 @@ const MenuProps = {
 };
 
 const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
+  'Bottled Water',
+  'Frozen Foods',
+  'Miscellaneous',
+  'Foods',
+  'Water',
 ];
 const name2 = [
 'Cm',
@@ -63,7 +58,7 @@ const Edit = ({handleCloser}) => {
           typeof value === 'string' ? value.split(',') : value,
         );
       };
-      
+
     return (
         <div className='scroll'>
             <div className='edit-popup-model'>
