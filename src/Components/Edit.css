@@ -33,6 +33,7 @@
 .buttonside{
   display: flex;
   justify-content: space-between;
+  padding: 1px;
 }
 .check{
   display: flex;
@@ -49,3 +50,21 @@
     bottom: 25vh;
     left: calc(50% - 15rem);
   }
+
+.user-data{
+  width: 100%;
+  margin-top: 20px;
+  display: block !important;
+}
+.user-data thead, 
+.user-data tbody{
+  width: 100% !important;
+}
+.user-data tr th, .user-data tr td {
+  border-bottom: 1px solid black;
+  /* border: 0px 0px 1px 0px solid #ddd; */
+  padding: 5px 10px;
+}
+.ag-theme-alpine{
+  width: 100%;
+}
