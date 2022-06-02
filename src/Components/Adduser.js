@@ -1,28 +1,39 @@
-import { TextField } from "@mui/material";
+import { Button, DialogActions, TextField } from "@mui/material";
 import React from "react";
 import './Edit.css';
 
-const Adduser = ({ onAdd }) => {
+const Adduser = ({ onAdd , handleCloser}) => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    onAdd( e.target.name.value, e.target.username.value, e.target.phone.value, e.target.email.value);
+    onAdd( e.target.name.value, e.target.username.value, e.target.phone.value, e.target.email.value, e.target.website.value);
     e.target.name.value = "";
     e.target.username.value = "";
     e.target.email.value = "";
+    e.target.website.value = "";
     e.target.phone.value = "";
   };
 
   return (
     <div className="formdialog">
             <form onSubmit={handleOnSubmit}>
-        <h3>Add User</h3>
-<TextField id="outlined-basic" placeholder="Name" name="name"/>
-<TextField id="outlined-basic" placeholder="UserName" name="username" />
-<TextField id="outlined-basic" placeholder="Phone" name="phone" />
-<TextField id="outlined-basic" placeholder="Email" name="email" />
+              <div className="buttonside"><h3>Add User</h3>
+        <Button onClick={handleCloser}>X</Button></div>
+        <div className="inputcss">
+          <TextField id="outlined-basic" placeholder="Name" name="name" style={{width:"400px", padding:"2px 2px 2px 2px"}}/>
+<TextField id="outlined-basic" placeholder="UserName" name="username" style={{width:"400px", padding:"2px 2px 2px 2px"}}/>
+<TextField id="outlined-basic" placeholder="Phone" name="phone" style={{width:"400px", padding:"2px 2px 2px 2px"}}/>
+<TextField id="outlined-basic" placeholder="Email" name="email" style={{width:"400px", padding:"2px 2px 2px 2px"}}/>
+<TextField id="outlined-basic" placeholder="Website" name="website" style={{width:"400px", padding:"2px 2px 2px 2px"}}/>
+</div>
 {/* <TextField id="outlined-basic" label="Status*" variant="outlined" style={{width:"200px", padding:"2px 2px 2px 2px"}} /> */}
-{/* <TextField id="outlined-basic" label="Status*" variant="outlined" style={{width:"200px", padding:"2px 2px 2px 2px"}} /> */}
+{/* <TextField id="outlined-basic" label="Status*" variant="outlined" style={{width:"200px", padding:"2px 2px 2px 2px"}} />
         <button onSubmit={handleOnSubmit}>Add</button>
+        <Button onClick={handleCloser}>Cancel</Button> */}
+        <DialogActions>
+                    <button onClick={handleCloser} >X Cancel</button>
+                    <button onSubmit={handleOnSubmit}>Add</button>
+                </DialogActions>
+
       </form>
     </div>
   );
